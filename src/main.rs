@@ -19,6 +19,11 @@ enum Commands {
         #[arg(short, long)]
         tags: Vec<String>,
     },
+    /// Searches for documents matching a query
+    Search {
+        /// the query
+        query: String,
+    },
 }
 
 fn main() {
@@ -29,6 +34,7 @@ fn main() {
             let source = UrlSource::from_url(String::from(url));
             rukby::add_content(&config, &source, &tags);
         }
+        Some(Commands::Search { query }) => rukby::search(&config, &query),
         None => {}
     }
 }
