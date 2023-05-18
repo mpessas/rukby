@@ -22,7 +22,6 @@ pub fn search(config: &Config, query: &str) {
     let results = client.search(query);
     println!("Found {0} results", results.len());
     for r in results {
-        println!("Result URL is {}", r.url());
-        println!("{}", r.excerpt());
+        println!("{}", r);
     }
 }

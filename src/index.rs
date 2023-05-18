@@ -1,4 +1,5 @@
 use crate::config::Config;
+use std::fmt;
 use meilisearch_sdk::search::SearchResults;
 use meilisearch_sdk::errors::Error;
 use rand::{distributions::Alphanumeric, Rng};
@@ -38,6 +39,12 @@ impl Article {
 
     pub fn excerpt(&self) -> &str {
         &self.content[..EXCERPT_LENGTH]
+    }
+}
+
+impl fmt::Display for Article {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}: {}", self.id, self.excerpt())
     }
 }
 
