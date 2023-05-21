@@ -24,6 +24,12 @@ enum Commands {
         /// the query
         query: String,
     },
+    /// Initialize the database.
+    Init {
+        /// The api key to use to initialize the project.
+        #[arg(long)]
+        master_key: String,
+    },
 }
 
 fn main() {
@@ -35,6 +41,7 @@ fn main() {
             rukby::add_content(&config, &source, &tags);
         }
         Some(Commands::Search { query }) => rukby::search(&config, &query),
+        Some(Commands::Init { master_key }) => rukby::init(&config, master_key.to_string()),
         None => {}
     }
 }

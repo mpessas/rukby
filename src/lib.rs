@@ -25,3 +25,14 @@ pub fn search(config: &Config, query: &str) {
         println!("{}", r);
     }
 }
+
+pub fn init(config: &Config, master_key: String) {
+    let client = Client::for_master_key(config, master_key);
+    print!("Creating the index...");
+    client.ensure_index();
+    println!("Done");
+
+    print!("Generating an API key...");
+    let api_key = client.ensure_api_key();
+    println!("Done. The API key is {}", api_key);
+}
